@@ -783,13 +783,14 @@ grafana:
     ## IngressClassName for Grafana Ingress.
     ## Should be provided if Ingress is enable.
     ##
-    # ingressClassName: nginx
+    ingressClassName: nginx
 
     ## Annotations for Grafana Ingress
     ##
     annotations:
       # kubernetes.io/ingress.class: nginx
-      # cert-manager.io/cluster-issuer: "letsencrypt"
+      # kubernetes.io/tls-acme: "true"
+      cert-manager.io/cluster-issuer: "letsencrypt"
 
     ## Labels to be added to the Ingress
     ##
@@ -800,6 +801,7 @@ grafana:
     ##
     hosts:
       - grafana.test-host.rebrainme.com
+    # hosts: []
 
     ## Path for grafana ingress
     path: /
@@ -807,10 +809,10 @@ grafana:
     ## TLS configuration for grafana Ingress
     ## Secret must be manually created in the namespace
     ##
-    # tls: 
-    # - secretName: grafana-general-tls
-    #  hosts:
-    #  - grafana.test-host.rebrainme.com
+    tls:
+    - secretName: grafana-general-tls
+      hosts:
+      - grafana.test-host.rebrainme.com
 
   sidecar:
     dashboards:
